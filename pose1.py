@@ -10,8 +10,8 @@ warnings.filterwarnings("ignore")
 mpPose=mp.solutions.pose
 pose=mpPose.Pose()
 
-file_name='img/ywqz5.mp4'
-
+file_name='img/ywqz1.mp4'
+# file_name='img/fwc1.mp4'
 
 def get_coordinate():
     cap = cv2.VideoCapture(file_name)
@@ -34,7 +34,7 @@ def get_coordinate():
             break
         imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         results = pose.process(imgRGB)
-        print(results)
+        # print(results)
         if results[0].pose_landmarks:
             h, w, c = img.shape
             cx = int(results[0].pose_landmarks.landmark[8].x * w)
@@ -47,11 +47,11 @@ def get_coordinate():
             elif hx < cx:
                 hx, hy = cx, cy
     cap.release()
+    # print(lx,ly,hx,hy)
     main.write_file_information(name,lx,ly,hx,hy)
     return lx,ly,hx,hy
 
-def ywqz_detection():
-    ptime = 0
+def detection():
     count = 0
     count_not_standard = 0
     cj = 0  # cj=0 到达最高点  cj=1 到达最低点
@@ -100,6 +100,10 @@ def ywqz_detection():
             break
 
     # 存储视频结果
-    main.write_ywqz_results(file_name, count, count_not_standard)
+    main.write_results(1,file_name, count, count_not_standard)
 
-ywqz_detection()
+# def fuc_detection():
+
+
+detection()
+
