@@ -43,8 +43,9 @@ def get_file(s):
             return results[i][1],results[i][2],results[i][3],results[i][4]
     return 0,0,0,0
 #将打开过的文件信息存档
-def write_file_information(file_name,lx,ly,hx,hw):
+def write_file_information(file_name,lx,ly,hx,hy):
     print(file_name)
+    print(lx,ly,hx,hy)
     if is_exist('file.txt',file_name):
         print('write_file_information:','The file has been recorded')
         return True
@@ -54,24 +55,30 @@ def write_file_information(file_name,lx,ly,hx,hw):
         file.write(str(lx)+' ')
         file.write(str(ly)+' ')
         file.write(str(hx)+' ')
-        file.write(str(hw))
+        file.write(str(hy))
     file.close()
 
 # 存储视频结果
-def write_ywqz_results(file_name,count,uncount):
+def write_results(type,file_name,count,uncount):
     #文件名，合格个数 不合格个数 分数
+
+    if type==0:
+        file_='ywqz.txt'
+    else:
+        file_='fwc.txt'
+
     #视频长度
     duration=get_file_duration(file_name)
     # print(count/duration)
     #文件前缀
     name=get_file_prefix(file_name)
 
-    #
-    if is_exist('ywqz.txt',name):
-        print('write_ywqz_results:','The file has been recorded')
+    #在结果记录中查询是否已存储
+    if is_exist(file_,name):
+        print('write_results:','The file has been recorded')
         return True
 
-    with open('ywqz.txt', 'a') as file:
+    with open(file_, 'a') as file:
         file.write(name+' ')
         file.write(str(count)+' ')
         file.write(str(uncount)+' ')
