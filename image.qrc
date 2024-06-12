@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="background">
+    <file>icons/stop.png</file>
+    <file>icons/begin.png</file>
+  </qresource>
+</RCC>
